@@ -1,11 +1,32 @@
-<h1>Burger Time</h1>
+<h1 style="width: 100%; text-align: center">Burger Time</h1>
 
 <ul>
-  {{#each burgers}}
+  {{#each burgers}} {{#unless devoured}}
   <li>
-    <p>
-      {{id}}. {{burger_name}}
-    </p>
+    <div>
+      <form action="/burgers/{{this.id}}?" method=PUT>
+        <button type="submit" class='notEaten'> {{this.burger_name}}</button>
+      </form>
+    </div>
   </li>
-  {{/each}}
+  {{/unless}} {{/each}}
 </ul>
+
+<br>
+<ul>
+  {{#each burgers}} {{#if devoured}}
+  <li>
+    <div>
+      <form >
+        <button class='Eaten'> {{this.burger_name}}</button>
+      </form>
+    </div>
+  </li>
+  {{/if}} {{/each}}
+</ul>
+
+<h2>Make a New Burger</h2>
+<form action="/" method="POST">
+  <input type="text" name="burger_name" placeholder="What kind of burger?"></input>
+  <button type="submit">Create a Burger!</button>
+</form>
