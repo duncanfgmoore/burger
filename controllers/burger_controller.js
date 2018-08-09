@@ -13,19 +13,17 @@ router.get("/", function (req, res) {
 });
 
 //Create a controller that will POST new burgers to the database
-router.post("/burgers", function (req, res) {
+router.post("/", function (req, res) {
   burger.insertOne([req.body.burger_name], function(result){
-    res.redirect("/");
+   
+   location.reload();
   });
 });
 
 //Create a controller that will update devoured to true in the database
 router.put("/burgers/:id", function (req, res) {
-  var condition = "id = " + req.params.id;
-
-  burger.updateOne({devoured: true}, condition, function(result){
-    
-    res.redirect("/");
+  burger.updateOne(req.params.id, function() {
+   
   });
 });
 
