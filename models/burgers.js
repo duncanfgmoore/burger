@@ -3,15 +3,21 @@ var orm = require("../config/orm.js");
 
 var burger = {
     selectAll: function(callback) {
-        orm.selectAll("burgers", callback)
+        orm.selectAll("burgers",function(res){
+            callback(res);
+        })
     },
 
-    insertOne: function(userChoice) {
-        orm.insertOne("burgers", "burger_name", userChoice);
+    insertOne: function(cols, vals, callback) {
+        orm.insertOne("burgers", cols, vals, function(res){
+            callback(res);
+        });
     },
 
-    updateOne: function(userChoice) {
-        orm.updateOne("burgers", false, userChoice);
+    updateOne: function(objColVals, condition, callback) {
+        orm.updateOne("burgers", objColVals, condition, function(res){
+            callback(res);
+        });
     }
 }
 

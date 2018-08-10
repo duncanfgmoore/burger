@@ -3,18 +3,32 @@
     background-color: lightcoral;
 }
 
-body {
-    width: 75%;
-   margin: 0 auto; 
+.jumbotron {
+    background-color: lightcoral;
+    border-radius: 0px;
+}
 
+body {
+   width: 75%;
+   margin: 0 auto; 
    display: flex;
    min-height: 100vh;
    flex-direction: column;
    background-color: white;
+   
+}
+
+.logoDiv {
+    width: 100%;
+    text-align: center;
+}
+
+.logo {
+    height: 200px;
 }
 h1 {
     width: 100%;
-    height: 100px;
+    height: 10px;
     text-align: center;
     background-color :lightcoral;
     

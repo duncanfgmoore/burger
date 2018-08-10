@@ -1,18 +1,15 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var orm = require("./config/orm.js");
 
 var PORT = process.env.PORT || 8080;
 
 var app = express();
 
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static("public"));
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 //Set Handlebars.
@@ -23,7 +20,6 @@ app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
 var routes = require("./controllers/burger_controller.js");
-
 app.use(routes);
 
 //App is listening...

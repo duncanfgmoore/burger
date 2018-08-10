@@ -1,34 +1,75 @@
 var connection = require("./connection.js");
 
-var orm = {
-    selectAll: function(selectTable, callback) {
-        var queryString = "SELECT * FROM ??";
-        connection.query(queryString, [selectTable], function(err, result) {
-          if (err) throw err;
-          //console.log(result);
-          callback(result);
-        });
-      },
+function printQuestionMarks(num) {
+  var arr = [];
 
-    insertOne: function(table, column, burgerInput, callback){
-        var queryString = 'INSERT INTO ' + table + '(' + column + ') VALUES (?)';
-    
-        connection.query(queryString, [burgerInput], function(err, result){
-          if(err) throw err;
-          //console.log(result);
-          //callback(result);
-        });
-      },
-   
-      updateOne: function(selectedTable, ifEaten, idNumber) {
-        var queryString = "UPDATE ?? SET devoured = ? WHERE id = ?";
-        console.log(queryString);
-        connection.query(queryString, [selectedTable, ifEaten, idNumber], function(err, result) {
-          if (err) throw err;
-          //console.log(result);
-        });
-      }
+  for (var i = 0; i < num; i++) {
+      arr.push("?");
+  }
+
+  return arr.toString();
 }
 
+// Helper function to convert object key/value pairs to SQL syntax
+function objToSql(ob) {
+  var arr = [];
+
+  // loop through the keys and push the key/value as a string int arr
+  for (var key in ob) {
+      var value = ob[key];
+      // check to skip hidden properties
+      if (Object.hasOwnProperty.call(ob, key)) {
+          // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+          if (typeof value === "string" && value.indexOf(" ") >= 0) {
+              value = "'" + value + "'";
+          }
+          
+          arr.push(key + "=" + value);
+      }
+  }
+  return arr.toString();
+}
+
+var orm = {
+  selectAll: function (table, callback) {
+    connection.query("SELECT * FROM ??;", [table], function (err, result) {
+        if (err) {
+            throw err;
+        }
+        console.log(result);
+        callback(result);
+        //result.render("index", { plans: data });
+    });
+},
+
+  insertOne: function (table, cols, vals, callback) {
+    var queryString = "INSERT INTO " + table;
+    queryString += "(";
+    queryString += cols.toString();
+    queryString += ") ";
+    queryString += "VALUES (";
+    queryString += printQuestionMarks(vals.length);
+    queryString += ") ";
+
+    console.log(queryString);
+
+    connection.query(queryString, values, function (err, result) {
+        if (err) throw err;
+        callback(result);
+    });
+  },
+
+  updateOne: function (table, objColVals, condition, callback) {
+    var queryString = "UPDATE " + table;
+        queryString += " SET ";
+        queryString += objToSql(objColVals);
+        queryString += " WHERE " + condition;
+        console.log(queryString);
+        connection.query(queryString, function (err, result) {
+            if (err) throw err;
+            callback(result);
+        });
+  }
+};
 
 module.exports = orm;
