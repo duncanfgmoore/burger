@@ -24,7 +24,7 @@ router.post("/api/burgers", function (req, res) {
 });
   
 //Create a controller that will update devoured to true in the database
-router.put("/api/burgers", function (req, res) {
+router.put("/api/burgers/:id", function (req, res) {
   var condition = "id = " + req.params.id;
 
   console.log("condition", condition);

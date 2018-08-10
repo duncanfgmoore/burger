@@ -12,12 +12,12 @@
             type: "PUT",
             data: objColVals
         }).then(
+            //getting to here but isnt hitting the function
             function() {
-                console.log("devoured burger!", id);
-                location.reload();
+                alert("devoured burger!", id);
+                location.reload();   
             }
         );
-        
     });
 
     $(".create-form").on("submit", function(event) {
@@ -29,6 +29,7 @@
             type: "POST",
             data: newBurger
         }).then(
+             //getting to here but isnt hitting the function
             function() {
                 console.log("served up a new burger!", newBurger.burger_name);
                 location.reload();
