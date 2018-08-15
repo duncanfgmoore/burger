@@ -37,4 +37,8 @@
         );
     })
 
+    $(".eaten").on("click", function(event) {
+        alert("You already ate that! Try something else.")
+    });
+
  })
