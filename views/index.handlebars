@@ -3,12 +3,15 @@
     <img src="/assets/images/eatBurger.png" class="logo">
   </div>
   <h1>Burger Time</h1>
+  
 </div>
 
 
-<div class="container">
+<div class="container contentArea">
 
-  <div id="notEatenList">
+  <h3>PRESS THE BURGER YOU WOULD LIKE TO EAT!</h3>
+
+  <div class="col-md-3" id="notEatenList">
     <h2>Eat Me!</h2>
     <br>
     <ul>
@@ -18,7 +21,7 @@
   </div>
 
 
-  <div id="eatenList">
+  <div class="col-md-3" id="eatenList">
     <h2>Already Eaten</h2>
     <br>
     <ul>
@@ -27,18 +30,17 @@
 
   </div>
 
-  <div id="createNewBurger">
+  <div class="col-md-3" id="createNewBurger">
     <h2>Make a New Burger</h2>
     <br>
     <form class="create-form">
       <div class="form-group">
-      <input id="burgerInput" type="text" name="name" placeholder="What kind of burger?">
-      <br>
-      <button class="btn btn-info" type="submit" class="createBurger">Create a Burger!</button>
+        <input id="burgerInput" type="text" name="name" placeholder="What kind of burger?">
+        <br>
+        <button class="btn btn-warning" type="submit" id="createBurger">Create a Burger!</button>
       </div>
     </form>
   </div>
 </div>
 
 <footer id="footer"></footer>
-
